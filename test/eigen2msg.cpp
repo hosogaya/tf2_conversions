@@ -8,9 +8,9 @@ int main()
     Eigen::Vector3<double> v{0.0, 1.0, 2.0};
     Eigen::Quaternion<double> q{1.0, 0.0, 2.0, 3.0};
 
-    geometry_msgs::msg::TransformStamped::UniquePtr tf; // = std::make_unique<geometry_msgs::msg::TransformStamped>();
+    geometry_msgs::msg::TransformStamped::UniquePtr tf = std::make_unique<geometry_msgs::msg::TransformStamped>();
     convertEigenToTranslation(v, tf.get());
-    convertEigenToRotation(q, tf.get());
+    convertEigenToRotation(q.toRotationMatrix(), tf.get());
 
 
     std::cout << "pos: " << tf->transform.translation.x << ", "
